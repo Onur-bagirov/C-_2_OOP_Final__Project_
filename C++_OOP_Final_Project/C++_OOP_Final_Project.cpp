@@ -33,6 +33,68 @@ public:
 
 void main();
 
+class ScoundMainPage
+{
+public:
+	int choice;
+
+	void Show()
+	{
+		system("cls");
+		cin.ignore();
+		cin.clear();
+
+		cout << "\n";
+
+		PrintText text("\t Welcome to Main Page !");
+		text.Print();
+
+		cout << "\n\n";
+
+		while (true)
+		{
+			system("cls");
+
+			cout << "\n";
+			cout << "\033[35m \t Welcome to Main Page ! \033[0m";
+			cout << "\n\n";
+
+			cout << "\t \033[33m  - Quiz            :  1 \033[0m" << endl;
+			cout << "\t \033[33m  - Creat New Quzi  :  2 \033[0m" << endl;
+			cout << "\t \033[31m  - Exit            :  3 \033[0m" << endl;
+
+			cout << "\n\n";
+
+			cout << "\t \033[36m Enter choice : \033[0m";
+			cin >> choice;
+
+			if (choice == 1)
+			{
+
+			}
+
+			else if (choice == 2)
+			{
+
+			}
+
+			else if (choice == 3)
+			{
+
+			}
+
+			else
+			{
+				cout << "\n\n";
+				cout << "\t \033[31m False choice ! Please again ! \033[0m" << endl;
+				Sleep(3000);
+			}
+		}
+	}
+};
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+
 class SignIn
 {
 public:
@@ -79,7 +141,16 @@ public:
 			cout << "\t \033[36m Enter password : \033[0m";
 			cin >> password;
 
-			ifstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document.txt");
+			ifstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document (2).txt");
+
+			if (!file.is_open()) 
+			{
+				cout << "\n\n";
+				cout << "\t \033[31m Error opening file ! \033[0m" << endl;
+				cout << "\n\n";
+
+				return;
+			}
 
 			string username_;
 			string password_;
@@ -88,18 +159,24 @@ public:
 
 			while (file >> username_ >> password_)
 			{
-				if (username_ == username_ && password_ == password)
+				if (username_ == username && password_ == password)
 				{
 					find = true;
 					break;
 				}
 			}
 
+			file.close();
+
 			if (find)
 			{
 				cout << "\n\n";
 				cout << "\t \033[32m Entaerance Successful ! \033[0m" << endl;
 				cout << "\n\n";
+
+				ScoundMainPage smain;
+				smain.Show();
+
 				break;
 			}
 
@@ -123,11 +200,11 @@ public:
 					main();
 				}
 			}
-
-			file.close();
 	    }
 	}
 };
+
+//--------------------------------------------------------------------------------------------------------------------------------------------
 
 class SignUp
 {
@@ -236,11 +313,11 @@ public:
 
 	void SaveFile() 
 	{
-		ofstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document.txt", ios::app); // ios::app - User melumatlari file elave edir.
+		ofstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document (2).txt", ios::app); // ios::app - User melumatlari file elave edir.
 
 		if (file.is_open()) 
 		{
-			file << "Username : " << username << ", Password: " << password << ", Name : " << name << ", Surname : " << surname << endl;
+			file << "  " << username << "  " << password << "  " << name << "  " << surname << endl;
 			file.close();
 
 			cout << "\n\n";
@@ -266,6 +343,7 @@ public:
 
 class Page
 {
+	virtual void Show() = 0;
 };
 
 class MainPage : public Page
@@ -316,7 +394,15 @@ public:
 			else if (choice == 3)
 			{
 				system("cls");
-				cout << "\t 033[31m Exit Program ! \033[0m" << endl;
+
+				cout << "\n\n";
+				cout << "\t \033[31m Exit Program ! \033[0m" << endl;
+
+				cout << "\n";
+
+				cout << "\t  God Bye !";
+
+				exit(0);
 			}
 
 			else
@@ -328,6 +414,8 @@ public:
 		}
 	}
 };
+
+// ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 void main()
 {
