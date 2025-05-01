@@ -266,7 +266,6 @@ public:
 
 class Page
 {
-	virtual void Show() = 0;
 };
 
 class MainPage : public Page
