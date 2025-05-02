@@ -3,10 +3,14 @@
 #include <fstream>
 #include <cstdio>
 #include <string>
+#include <vector>
+#include <cctype>
 
-// ------------------------------------------------------------------ SHOW TITLE PART -------------------------------------------------------------------
+// ---------------------------------------------------- SHOW TITLE PART -------------------------------------------------------------------
 
 using namespace std;
+
+void main();
 
 class PrintText
 {
@@ -28,18 +32,146 @@ public:
 		cout << endl;
 	} 
 };
+//---------------------------------------------------- THIRT PART -------------------------------------------------------------------
 
-//------------------------------------------------------------------- SIGIN IN AND SIGN UP PART -------------------------------------------------------------
+class ShowCorrectAnswer
+{
+public:
+	string corretAnswer;
+	string text;
 
-void main();
+	static string Upper(const string& s)
+	{
+		string res = s;
 
-class ScoundMainPage
+		for (char& c : res)
+		{
+			c = toupper(c);
+		}
+
+		return res;
+	}
+
+	ShowCorrectAnswer(string t, string c)
+	{
+		text = t;
+		corretAnswer = Upper(c);
+	}
+};
+
+class Questions
+{
+public:
+	vector<ShowCorrectAnswer> questions()
+	{
+		return
+		{
+			ShowCorrectAnswer("\t 1. Which data type is used for decimal number in Python ?\n\n \t\tA) Int\n \t\tB) Float\n \t\tC) Str \n\n", "B"),
+			ShowCorrectAnswer("\t 2. Which function is used to take input from the user in Python ?\n\n \t\tA) Read()\n \t\tB) Input()\n \t\tC) Scan() \n\n", "B"),
+			ShowCorrectAnswer("\t 3. Which brackets are used to define a list in Python ?\n\n \n\tA) {}\n \n\tB) ()\n \n\tC) [] \n\n", "C"),
+			ShowCorrectAnswer("\t 4. Which keyword is used to define a function in Python ?\n\n \t\tA) Func\n \t\tB) Function\n \t\tC) Def \n\n", "C"),
+		    ShowCorrectAnswer("\t 5. Which of the following is a valid variable name in Python ?\n\n \t\tA) 2value\n \t\tB) value_2 \n \t\tC) value-2 \n\n", "B")
+		};
+	}
+};
+
+class Quiz
+{
+public:
+	char choice;
+	int score = 0;
+	int right = 0;
+
+	void QuizPage(const vector<ShowCorrectAnswer>& questions)
+	{
+
+		system("cls");
+		cin.ignore();
+		cin.clear();
+
+		cout << "\n";
+
+		PrintText text("\t Welcome to Quiz Page !");
+		text.Print();
+
+		cout << "\n\n";
+
+		system("cls");
+
+		for (const auto& q : questions)
+		{
+			bool CheckIncluded = false;
+
+			while (!CheckIncluded)
+			{
+				cout << "\n";
+				cout << "\033[35m \t Welcome to Quiz Page ! \033[0m";
+				cout << "\n\n";
+
+				cout << "\n\n";
+				cout << q.text << "\t \033[36m Enter answer ( A/B/C) : \033[0m";
+				cin >> choice;
+				cout << "\n\n";
+
+				if (toupper(choice) == 'A' || toupper(choice) == 'B' || toupper(choice) == 'C')
+				{
+
+					CheckIncluded = true;
+
+					if (toupper(choice) == toupper(q.corretAnswer[0]))
+					{
+						cout << "\n\n";
+						cout << "\t \033[32m Your answer is correct \033[0m";
+						cout << "\n\n";
+
+						score += 20;
+						right++;
+
+						Sleep(2000);
+					}
+
+					else
+					{
+						cout << "\n\n";
+						cout << "\t\t \033[31m Your answer isn't correct \033[0m";
+						cout << "\n\n";
+
+						cout << "\t\t \033[31m Correct answer is : \033[0m" << q.corretAnswer;
+						cout << "\n\n";
+
+						Sleep(2000);
+
+					}
+				}
+
+
+				else
+				{
+					cout << "\n\n";
+					cout << "\t \033[31m Error ! Please Try again ! \033[0m";
+					cout << "\n\n";
+
+					Sleep(2000);
+				}
+
+				system("cls");
+			}
+		}
+	}
+};
+
+//-----------------------------------------------------	SECOUND PART -------------------------------------------------------------
+
+class SecoundMainPage
 {
 public:
 	int choice;
 
 	void Show()
 	{
+		int score;
+		int right;
+
 		system("cls");
 		cin.ignore();
 		cin.clear();
@@ -48,6 +180,8 @@ public:
 
 		PrintText text("\t Welcome to Main Page !");
 		text.Print();
+
+		Questions questions;
 
 		cout << "\n\n";
 
@@ -58,10 +192,10 @@ public:
 			cout << "\n";
 			cout << "\033[35m \t Welcome to Main Page ! \033[0m";
 			cout << "\n\n";
-
 			cout << "\t \033[33m  - Quiz            :  1 \033[0m" << endl;
-			cout << "\t \033[33m  - Creat New Quzi  :  2 \033[0m" << endl;
-			cout << "\t \033[31m  - Exit            :  3 \033[0m" << endl;
+			cout << "\t \033[33m  - Your Quiz       :  2 \033[0m" << endl;
+			cout << "\t \033[33m  - Creat New Quzi  :  3 \033[0m" << endl;
+			cout << "\t \033[31m  - Exit            :  4 \033[0m" << endl;
 
 			cout << "\n\n";
 
@@ -70,7 +204,8 @@ public:
 
 			if (choice == 1)
 			{
-
+				Quiz q1;
+				q1.QuizPage(questions.questions());
 			}
 
 			else if (choice == 2)
@@ -79,6 +214,11 @@ public:
 			}
 
 			else if (choice == 3)
+			{
+
+			}
+
+			else if (choice == 4)
 			{
 
 			}
@@ -92,8 +232,6 @@ public:
 		}
 	}
 };
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class SignIn
 {
@@ -171,11 +309,14 @@ public:
 			if (find)
 			{
 				cout << "\n\n";
-				cout << "\t \033[32m Entaerance Successful ! \033[0m" << endl;
+				cout << "\t \033[32m Enterance Successful ! \033[0m" << endl;
 				cout << "\n\n";
 
-				ScoundMainPage smain;
+				Sleep(2000);
+
+				SecoundMainPage smain;
 				smain.Show();
+
 
 				break;
 			}
@@ -339,7 +480,7 @@ public:
 	}
 };
 
-//------------------------------------------------------------------ MAIN PAGE PART ---------------------------------------------------------------------------------------
+//-------------------------------------------------------- FIRTS PART ---------------------------------------------------------------------------------------
 
 class Page
 {
