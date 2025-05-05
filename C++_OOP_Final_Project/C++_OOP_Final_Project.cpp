@@ -26,7 +26,6 @@ public:
 			if (pas == 8 && !password.empty())
 			{
 				password.pop_back();
-				cout << "\b \b";
 			}
 
 			else if (pas != 8)
