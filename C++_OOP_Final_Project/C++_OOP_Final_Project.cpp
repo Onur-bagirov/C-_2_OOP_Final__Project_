@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <string>
 #include <vector>
+#include <conio.h> 
 #include <cctype>
 
 // ---------------------------------------------------- SHOW TITLE PART -------------------------------------------------------------------
@@ -11,6 +12,34 @@
 using namespace std;
 
 void main();
+
+class Password
+{
+public:
+	static string password()
+	{
+		string password;
+		char pas;
+
+		while ((pas = _getch()) != 13)
+		{
+			if (pas == 8 && !password.empty())
+			{
+				password.pop_back();
+				cout << "\b \b";
+			}
+
+			else if (pas != 8)
+			{
+				password.push_back(pas);
+				cout << "*";
+			}
+		}
+
+		cout << endl;
+		return password;
+	}
+};
 
 class PrintText
 {
@@ -29,6 +58,7 @@ public:
 			cout << "\033[35m" << Text[i] << "\033[0m";
 			Sleep(40);
 		}
+
 		cout << endl;
 	} 
 };
@@ -66,11 +96,11 @@ public:
 	{
 		return
 		{
-			ShowCorrectAnswer("\t 1. Which data type is used for decimal number in Python ?\n\n \t\tA) Int\n \t\tB) Float\n \t\tC) Str \n\n", "B"),
-			ShowCorrectAnswer("\t 2. Which function is used to take input from the user in Python ?\n\n \t\tA) Read()\n \t\tB) Input()\n \t\tC) Scan() \n\n", "B"),
-			ShowCorrectAnswer("\t 3. Which brackets are used to define a list in Python ?\n\n \n\tA) {}\n \n\tB) ()\n \n\tC) [] \n\n", "C"),
-			ShowCorrectAnswer("\t 4. Which keyword is used to define a function in Python ?\n\n \t\tA) Func\n \t\tB) Function\n \t\tC) Def \n\n", "C"),
-		    ShowCorrectAnswer("\t 5. Which of the following is a valid variable name in Python ?\n\n \t\tA) 2value\n \t\tB) value_2 \n \t\tC) value-2 \n\n", "B")
+			ShowCorrectAnswer("\t 1. Which data type is used for decimal number in Python ? (20 coin) \n\n \t\tA) Int\n \t\tB) Float\n \t\tC) Str \n\n", "B"),
+			ShowCorrectAnswer("\t 2. Which function is used to take input from the user in Python ?  (20 coin)\n\n \t\tA) Read()\n \t\tB) Input()\n \t\tC) Scan() \n\n", "B"),
+			ShowCorrectAnswer("\t 3. Which brackets are used to define a list in Python ?  (20 coin)\n\n \n\tA) {}\n \n\tB) ()\n \n\tC) [] \n\n", "C"),
+			ShowCorrectAnswer("\t 4. Which keyword is used to define a function in Python ?  (20 coin)\n\n \t\tA) Func\n \t\tB) Function\n \t\tC) Def \n\n", "C"),
+		    ShowCorrectAnswer("\t 5. Which of the following is a valid variable name in Python ?  (20 coin)\n\n \t\tA) 2value\n \t\tB) value_2 \n \t\tC) value-2 \n\n", "B")
 		};
 	}
 };
@@ -108,8 +138,10 @@ public:
 				cout << "\n\n";
 
 				cout << "\n\n";
+
 				cout << q.text << "\t \033[36m Enter answer ( A/B/C) : \033[0m";
 				cin >> choice;
+
 				cout << "\n\n";
 
 				if (toupper(choice) == 'A' || toupper(choice) == 'B' || toupper(choice) == 'C')
@@ -120,7 +152,7 @@ public:
 					if (toupper(choice) == toupper(q.corretAnswer[0]))
 					{
 						cout << "\n\n";
-						cout << "\t \033[32m Your answer is correct \033[0m";
+						cout << "\t\t \033[32m Your answer is correct ! \033[0m";
 						cout << "\n\n";
 
 						score += 20;
@@ -132,7 +164,7 @@ public:
 					else
 					{
 						cout << "\n\n";
-						cout << "\t\t \033[31m Your answer isn't correct \033[0m";
+						cout << "\t\t \033[31m Your answer isn't correct ! \033[0m";
 						cout << "\n\n";
 
 						cout << "\t\t \033[31m Correct answer is : \033[0m" << q.corretAnswer;
@@ -145,7 +177,7 @@ public:
 				else
 				{
 					cout << "\n\n";
-					cout << "\t \033[31m Error ! Please Try again ! \033[0m";
+					cout << "\t\t \033[31m Error ! Please Try again ! \033[0m";
 					cout << "\n\n";
 
 					Sleep(2000);
@@ -154,6 +186,22 @@ public:
 				system("cls");
 			}
 		}
+
+		system("cls");
+
+		cout << "\n";
+
+		PrintText text_two("\t Your quiz result !");
+		text_two.Print();
+
+		cout << "\n\n";
+
+		cout << "\t \033[36m Right Questions : " << right << " / 5 \033[0m" << endl;
+		cout << "\n\n";
+		cout << "\t \033[36m Score : " << score << " / 100 \033[0m" << endl;
+		cout << "\n\n";
+
+		Sleep(9000);
 	}
 };
 
@@ -162,7 +210,7 @@ public:
 class SecoundMainPage
 {
 public:
-	int choice;
+	char choice;
 
 	void Show()
 	{
@@ -174,6 +222,8 @@ public:
 		cin.clear();
 
 		cout << "\n";
+
+		Questions questions;
 
 		PrintText text("\t Welcome to Main Page !");
 		text.Print();
@@ -187,6 +237,7 @@ public:
 			cout << "\n";
 			cout << "\033[35m \t Welcome to Main Page ! \033[0m";
 			cout << "\n\n";
+
 			cout << "\t \033[33m  - Quiz            :  1 \033[0m" << endl;
 			cout << "\t \033[33m  - Your Quiz       :  2 \033[0m" << endl;
 			cout << "\t \033[33m  - Creat New Quzi  :  3 \033[0m" << endl;
@@ -197,25 +248,37 @@ public:
 			cout << "\t \033[36m Enter choice : \033[0m";
 			cin >> choice;
 
-			if (choice == 1)
+			if (choice == '1')
 			{
 				Quiz q1;
 				q1.QuizPage(questions.questions());
+
+				Show();
+				break;
 			}
 
-			else if (choice == 2)
+			else if (choice == '2')
 			{
 
 			}
 
-			else if (choice == 3)
+			else if (choice == '3')
 			{
 
 			}
 
-			else if (choice == 4)
+			else if (choice == '4')
 			{
+				system("cls");
 
+				cout << "\n\n";
+				cout << "\t \033[31m Exit Program ! \033[0m" << endl;
+
+				cout << "\n";
+
+				cout << "\t  God Bye !";
+
+				exit(0);
 			}
 
 			else
@@ -223,6 +286,7 @@ public:
 				cout << "\n\n";
 				cout << "\t \033[31m False choice ! Please again ! \033[0m" << endl;
 				Sleep(3000);
+
 			}
 		}
 	}
@@ -272,7 +336,7 @@ public:
 			cout << "\n\n";
 
 			cout << "\t \033[36m Enter password : \033[0m";
-			cin >> password;
+			password = Password::password();
 
 			ifstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document (2).txt");
 
@@ -338,8 +402,6 @@ public:
 	    }
 	}
 };
-
-//--------------------------------------------------------------------------------------------------------------------------------------------
 
 class SignUp
 {
@@ -426,7 +488,7 @@ public:
 		while (true)
 		{
 			cout << "\t \033[36m Enter password (min len 7) : \033[0m";
-			cin >> password;
+			password = Password::password();
 
 			if (password.length() >= 7)
 			{
@@ -486,13 +548,14 @@ class MainPage : public Page
 public:
 	void Show() override
 	{
-		int choice;
+		char choice;
 		cout << "\n";
 
 		PrintText text("\t Welcome to Main Page !");
 		text.Print();
 
 		cout << "\n\n";
+
 		while (true)
 		{
 			system("cls");
@@ -510,7 +573,7 @@ public:
 			cout << "\t \033[36m Enter choice : \033[0m";
 			cin >> choice;
 
-			if (choice == 1)
+			if (choice == '1')
 			{
 				SignUp signUp;
 				signUp.UserInfo();
@@ -518,7 +581,7 @@ public:
 				break;
 			}
 
-			else if (choice == 2)
+			else if (choice == '2')
 			{
 				SignIn signIn;
 				signIn.Include();
@@ -526,7 +589,7 @@ public:
 				break;
 			}
 
-			else if (choice == 3)
+			else if (choice == '3')
 			{
 				system("cls");
 
