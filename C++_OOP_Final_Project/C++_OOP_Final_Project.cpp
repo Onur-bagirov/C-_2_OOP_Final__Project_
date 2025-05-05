@@ -84,7 +84,6 @@ public:
 
 	void QuizPage(const vector<ShowCorrectAnswer>& questions)
 	{
-
 		system("cls");
 		cin.ignore();
 		cin.clear();
@@ -140,10 +139,8 @@ public:
 						cout << "\n\n";
 
 						Sleep(2000);
-
 					}
 				}
-
 
 				else
 				{
@@ -180,8 +177,6 @@ public:
 
 		PrintText text("\t Welcome to Main Page !");
 		text.Print();
-
-		Questions questions;
 
 		cout << "\n\n";
 
@@ -316,7 +311,6 @@ public:
 
 				SecoundMainPage smain;
 				smain.Show();
-
 
 				break;
 			}
