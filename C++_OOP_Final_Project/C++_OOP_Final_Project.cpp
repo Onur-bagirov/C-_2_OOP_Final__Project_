@@ -126,8 +126,6 @@ public:
 
 		cout << "\n\n";
 
-		system("cls");
-
 		for (const auto& q : questions)
 		{
 			bool CheckIncluded = false;
@@ -173,7 +171,6 @@ public:
 
 						Sleep(2000);
 					}
-				}
 
 				else
 				{
@@ -187,10 +184,6 @@ public:
 				system("cls");
 			}
 		}
-
-		system("cls");
-
-		cout << "\n";
 
 		PrintText text_two("\t Your quiz result !");
 		text_two.Print();
@@ -406,8 +399,6 @@ public:
 		CreateQuiz quiz;
 
 		system("cls");
-		cin.ignore();
-		cin.clear();
 
 		cout << "\n";
 
