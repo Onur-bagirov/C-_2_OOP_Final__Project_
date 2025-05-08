@@ -118,7 +118,6 @@ public:
 		cin.clear();
 
 		cout << "\n";
-
 		PrintText text("\t Welcome to Quiz Page !");
 		text.Print();
 
@@ -132,7 +131,6 @@ public:
 
 			while (!CheckIncluded)
 			{
-				cout << "\n";
 				cout << "\033[35m \t Welcome to Quiz Page ! \033[0m";
 				cout << "\n\n";
 
