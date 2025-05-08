@@ -7,7 +7,7 @@
 #include <conio.h> 
 #include <cctype>
 
-// ---------------------------------------------------- SHOW TITLE PART -------------------------------------------------------------------
+// ---------------------------------------------------- SHOW TITLE PART -------------------------------------------------------------
 
 using namespace std;
 
@@ -26,6 +26,7 @@ public:
 			if (pas == 8 && !password.empty())
 			{
 				password.pop_back();
+				cout << "\b \b";
 			}
 
 			else if (pas != 8)
@@ -61,6 +62,7 @@ public:
 		cout << endl;
 	} 
 };
+
 //---------------------------------------------------- THIRT PART -------------------------------------------------------------------
 
 class ShowCorrectAnswer
@@ -118,6 +120,7 @@ public:
 		cin.clear();
 
 		cout << "\n";
+
 		PrintText text("\t Welcome to Quiz Page !");
 		text.Print();
 
@@ -131,6 +134,7 @@ public:
 
 			while (!CheckIncluded)
 			{
+				cout << "\n";
 				cout << "\033[35m \t Welcome to Quiz Page ! \033[0m";
 				cout << "\n\n";
 
@@ -202,7 +206,192 @@ public:
 	}
 };
 
-//-----------------------------------------------------	SECOUND PART -------------------------------------------------------------
+struct Question
+{
+	string Question_c;
+	string A;
+	string B;
+	string C;
+	string TrueAnswer;
+};
+
+class CreateQuiz {
+public:
+	vector<Question> questions;
+
+	static string Upper(const string& s)
+	{
+		string res = s;
+		for (char& c : res) {
+			c = toupper(c);
+		}
+		return res;
+	}
+
+	void Create()
+	{
+		system("cls");
+		cin.ignore();
+		cin.clear();
+
+		cout << "\n";
+
+		PrintText text("\t Welcome to Create Question Page !");
+		text.Print();
+
+		cout << "\n\n";
+
+		for (int i = 0; i < 5; ++i)
+		{
+			Question q;
+			cout << "\n\n";
+
+			cout << "\t" << i + 1 << ". ";
+			getline(cin, q.Question_c);
+
+			cout << "\n";
+
+			cout << "\t\t A) ";
+			getline(cin, q.A);
+
+			cout << "\t\t B) ";
+			getline(cin, q.B);
+
+			cout << "\t\t C) ";
+			getline(cin, q.C);
+
+			cout << "\n";
+
+			while (true)
+			{
+				cout << "\t \033[36m Enter true answer (A/B/C) : \033[0m";
+				getline(cin, q.TrueAnswer);
+
+				q.TrueAnswer = Upper(q.TrueAnswer);
+
+				if (q.TrueAnswer == "A" || q.TrueAnswer == "B" || q.TrueAnswer == "C")
+				{
+					break;
+				}
+
+				cout << "\n\n";
+				cout << "\t \033[31m Incorrect answer! Try again! \033[0m";
+				cout << "\n\n";
+			}
+
+			questions.push_back(q);
+
+			cout << "\n\n";
+			cout << "\n\t\033[32m Question successfully entered!\033[0m";
+			cout << "\n\n";
+		}
+
+		cout << "\n\n";
+		cout << "\n\t\033[32m All questions have been successfully entered! \033[0m";
+		cout << "\n\n";
+
+		Sleep(2000);
+	}
+};
+
+class YourQuiz
+{
+public:
+	char choice;
+	int score = 0;
+	int right = 0;
+
+	void Answer(const vector<Question>& questions)
+	{
+		system("cls");
+		cin.ignore();
+		cin.clear();
+
+		PrintText text("\t Welcome to Quiz Page !");
+		text.Print();
+
+		for (int i = 0; i < questions.size(); ++i)
+		{
+			const Question& q = questions[i];
+
+			while (true)
+			{
+				system("cls");
+
+				cout << "\n";
+
+				cout << "\033[35m \t Welcome to Quiz Page ! \033[0m";
+				cout << "\n\n";
+
+				cout << "\t" << i + 1 << ". " << q.Question_c << "\n\n";
+				cout << "\t\t A) " << q.A << "\n";
+				cout << "\t\t B) " << q.B << "\n";
+				cout << "\t\t C) " << q.C << "\n\n";
+
+				cout << "\n\n";
+
+				cout << "\t \033[36m Enter answer (A/B/C) : \033[0m";
+				cin >> choice;
+
+				cout << "\n\n";
+
+				choice = toupper(choice);
+
+				if (choice == 'A' || choice == 'B' || choice == 'C')
+				{
+					if (choice == toupper(q.TrueAnswer[0]))
+					{
+
+						cout << "\n\n";
+						cout << "\t\t \033[32m Your answer is correct! \033[0m";
+						cout << "\n\n";
+
+						Sleep(2000);
+
+						score += 20;
+						right++;
+					}
+					else
+					{
+						cout << "\n\n";
+						cout << "\t\t \033[31m Your answer isn't correct! \033[0m";
+						cout << "\n\n";
+
+						cout << "\t\t \033[31m Correct answer is: \033[0m" << q.TrueAnswer;
+						cout << "\n\n";
+
+						Sleep(2000);
+					}
+				}
+
+				else
+				{
+					cout << "\n\n";
+					cout << "\t\t \033[31m Error ! Please Try again ! \033[0m";
+					cout << "\n\n";
+
+					Sleep(2000);
+				}
+
+				system("cls");
+			}
+		}
+
+		system("cls");
+
+		PrintText resultText("\t Your quiz result !");
+		resultText.Print();
+
+		cout << "\n\n";
+		cout << "\t \033[36m Right Questions : " << right << " / " << questions.size() << " \033[0m\n";
+		cout << "\n";
+		cout << "\t \033[36m Score : " << score << " / " << questions.size()<< " \033[0m\n\n";
+
+		Sleep(9000);
+	}
+};
+
+//-------------------------------------------------- SECOUND PART ----------------------------------------------------------------------
 
 class SecoundMainPage
 {
@@ -214,13 +403,15 @@ public:
 		int score;
 		int right;
 
+		CreateQuiz quiz;
+
 		system("cls");
 		cin.ignore();
 		cin.clear();
 
 		cout << "\n";
 
-		Questions questions;
+		Questions Questions;
 
 		PrintText text("\t Welcome to Main Page !");
 		text.Print();
@@ -237,7 +428,7 @@ public:
 
 			cout << "\t \033[33m  - Quiz            :  1 \033[0m" << endl;
 			cout << "\t \033[33m  - Your Quiz       :  2 \033[0m" << endl;
-			cout << "\t \033[33m  - Creat New Quzi  :  3 \033[0m" << endl;
+			cout << "\t \033[33m  - Creat New Quiz  :  3 \033[0m" << endl;
 			cout << "\t \033[31m  - Exit            :  4 \033[0m" << endl;
 
 			cout << "\n\n";
@@ -245,10 +436,10 @@ public:
 			cout << "\t \033[36m Enter choice : \033[0m";
 			cin >> choice;
 
-			if (choice == '1')
+			if (choice == '1') 
 			{
 				Quiz q1;
-				q1.QuizPage(questions.questions());
+				q1.QuizPage(Questions.questions());
 
 				Show();
 				break;
@@ -256,11 +447,29 @@ public:
 
 			else if (choice == '2')
 			{
+				if (quiz.questions.empty())
+				{
+					cout << "\n\n";
+					cout << "\t \033[31m No quiz found ! \033[0m";
+					cout << "\n\n";
+					Sleep(2000);
+					continue;
+				}
+
+				YourQuiz yq;
+				yq.Answer(quiz.questions);
+
+				Show();
+				break;
 			}
 
 			else if (choice == '3')
 			{
+				quiz.Create();
+				continue;
 
+				Show();
+				break;
 			}
 
 			else if (choice == '4')
@@ -280,7 +489,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m False choice ! Please again ! \033[0m" << endl;
+				cout << "\t \033[31m Incorrect choice ! Please again ! \033[0m" << endl;
 				Sleep(3000);
 
 			}
@@ -339,7 +548,7 @@ public:
 			if (!file.is_open()) 
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Error opening file ! \033[0m" << endl;
+				cout << "\t \033[31m File isn't open ! \033[0m" << endl;
 				cout << "\n\n";
 
 				return;
@@ -434,7 +643,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your name is long ! Please try again ! \033[0m" << endl;
+				cout << "\t \033[31m Your name is short ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
 			}
 		}
@@ -454,7 +663,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your surname is long ! Please try again ! \033[0m" << endl;
+				cout << "\t \033[31m Your surname is short ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
 			}
 		}
@@ -474,7 +683,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your user name is long ! Please try again ! \033[0m" << endl;
+				cout << "\t \033[31m Your user name is short ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
 			}
 		}
@@ -494,7 +703,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your password is long ! Please try again ! \033[0m" << endl;
+				cout << "\t \033[31m Your password is short ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
 			}
 		}
@@ -532,7 +741,7 @@ public:
 	}
 };
 
-//-------------------------------------------------------- FIRTS PART ---------------------------------------------------------------------------------------
+//-------------------------------------------------- FIRTS PART --------------------------------------------------------------------------
 
 class Page
 {
@@ -544,7 +753,7 @@ class MainPage : public Page
 public:
 	void Show() override
 	{
-		char choice;
+		string choice;
 		cout << "\n";
 
 		PrintText text("\t Welcome to Main Page !");
@@ -569,7 +778,7 @@ public:
 			cout << "\t \033[36m Enter choice : \033[0m";
 			cin >> choice;
 
-			if (choice == '1')
+			if (choice == "1")
 			{
 				SignUp signUp;
 				signUp.UserInfo();
@@ -577,7 +786,7 @@ public:
 				break;
 			}
 
-			else if (choice == '2')
+			else if (choice == "2")
 			{
 				SignIn signIn;
 				signIn.Include();
@@ -585,7 +794,7 @@ public:
 				break;
 			}
 
-			else if (choice == '3')
+			else if (choice == "3")
 			{
 				system("cls");
 
@@ -602,14 +811,14 @@ public:
 			else
 			{    
 				cout << "\n\n";
-				cout << "\t \033[31m False choice ! Please again ! \033[0m" << endl;
+				cout << "\t \033[31m Incorrect choice ! Please again ! \033[0m" << endl;
 				Sleep(3000);
 			}
 		}
 	}
 };
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------------------
 
 void main()
 {
