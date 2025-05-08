@@ -99,7 +99,7 @@ public:
 		{
 			ShowCorrectAnswer("\t 1. Which data type is used for decimal number in Python ? (20 coin) \n\n \t\tA) Int\n \t\tB) Float\n \t\tC) Str \n\n", "B"),
 			ShowCorrectAnswer("\t 2. Which function is used to take input from the user in Python ?  (20 coin)\n\n \t\tA) Read()\n \t\tB) Input()\n \t\tC) Scan() \n\n", "B"),
-			ShowCorrectAnswer("\t 3. Which brackets are used to define a list in Python ?  (20 coin)\n\n \n\tA) {}\n \n\tB) ()\n \n\tC) [] \n\n", "C"),
+			ShowCorrectAnswer("\t 3. Which brackets are used to define a list in Python ?  (20 coin)\n\n \t\tA) {}\n \t\tB) ()\n \t\tC) [] \n\n", "C"),
 			ShowCorrectAnswer("\t 4. Which keyword is used to define a function in Python ?  (20 coin)\n\n \t\tA) Func\n \t\tB) Function\n \t\tC) Def \n\n", "C"),
 		    ShowCorrectAnswer("\t 5. Which of the following is a valid variable name in Python ?  (20 coin)\n\n \t\tA) 2value\n \t\tB) value_2 \n \t\tC) value-2 \n\n", "B")
 		};
@@ -109,7 +109,7 @@ public:
 class Quiz
 {
 public:
-	char choice;
+	string choice;
 	int score = 0;
 	int right = 0;
 
@@ -132,6 +132,8 @@ public:
 
 			while (!CheckIncluded)
 			{
+				system("cls");
+
 				cout << "\n";
 				cout << "\033[35m \t Welcome to Quiz Page ! \033[0m";
 				cout << "\n\n";
@@ -141,14 +143,16 @@ public:
 				cout << q.text << "\t \033[36m Enter answer ( A/B/C) : \033[0m";
 				cin >> choice;
 
+				cin.ignore();
+
 				cout << "\n\n";
 
-				if (toupper(choice) == 'A' || toupper(choice) == 'B' || toupper(choice) == 'C')
+				if (choice.length() == 1 && (toupper(choice[0]) == 'A' || toupper(choice[0]) == 'B' || toupper(choice[0]) == 'C'))
 				{
 
 					CheckIncluded = true;
 
-					if (toupper(choice) == toupper(q.corretAnswer[0]))
+					if (toupper(choice[0]) == toupper(q.corretAnswer[0]))
 					{
 						cout << "\n\n";
 						cout << "\t\t \033[32m Your answer is correct ! \033[0m";
@@ -171,6 +175,7 @@ public:
 
 						Sleep(2000);
 					}
+				}
 
 				else
 				{
@@ -182,8 +187,10 @@ public:
 				}
 
 				system("cls");
+
 			}
 		}
+		cout << "\n";
 
 		PrintText text_two("\t Your quiz result !");
 		text_two.Print();
@@ -195,7 +202,7 @@ public:
 		cout << "\t \033[36m Score : " << score << " / 100 \033[0m" << endl;
 		cout << "\n\n";
 
-		Sleep(9000);
+		Sleep(2000);
 	}
 };
 
@@ -236,6 +243,12 @@ public:
 
 		for (int i = 0; i < 5; ++i)
 		{
+			system("cls");
+
+			cout << "\n";
+			cout << "\033[35m \t  Welcome to Create Question Page ! \033[0m";
+			cout << "\n\n";
+
 			Question q;
 			cout << "\n\n";
 
@@ -277,6 +290,9 @@ public:
 			cout << "\n\n";
 			cout << "\n\t\033[32m Question successfully entered!\033[0m";
 			cout << "\n\n";
+
+			Sleep(2000);
+			system("cls");
 		}
 
 		cout << "\n\n";
@@ -290,7 +306,7 @@ public:
 class YourQuiz
 {
 public:
-	char choice;
+	string choice;
 	int score = 0;
 	int right = 0;
 
@@ -328,11 +344,9 @@ public:
 
 				cout << "\n\n";
 
-				choice = toupper(choice);
-
-				if (choice == 'A' || choice == 'B' || choice == 'C')
+				if (choice.length() == 1 && (toupper(choice[0]) == 'A' || toupper(choice[0]) == 'B' || toupper(choice[0]) == 'C'))
 				{
-					if (choice == toupper(q.TrueAnswer[0]))
+					if (toupper(choice[0]) == toupper(q.TrueAnswer[0]))
 					{
 
 						cout << "\n\n";
@@ -355,6 +369,10 @@ public:
 
 						Sleep(2000);
 					}
+
+					system("cls");
+					break;
+
 				}
 
 				else
