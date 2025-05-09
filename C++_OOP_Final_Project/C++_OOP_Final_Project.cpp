@@ -39,7 +39,7 @@ public:
 		cout << endl;
 		return password;
 	}
-};
+}; // Passwordu ulduz cevirmek ucun class
 
 class PrintText
 {
@@ -61,11 +61,9 @@ public:
 
 		cout << endl;
 	} 
-};
+}; // Texti animasiya vermek ucun class
 
-//---------------------------------------------------- THIRT PART -------------------------------------------------------------------
-
-class ShowCorrectAnswer
+class ToUpper
 {
 public:
 	static string Upper(const string& s)
@@ -79,11 +77,20 @@ public:
 
 		return res;
 	}
+}; // Stringleri boyutmek ucun fuksiya
+
+//---------------------------------------------------- THIRT PART -------------------------------------------------------------------
+
+class ShowCorrectAnswer
+{
+public:
+	string corretAnswer;
+	string text;
 
 	ShowCorrectAnswer(string t, string c)
 	{
 		text = t;
-		corretAnswer = Upper(c);
+		corretAnswer = ToUpper::Upper(c);
 	}
 };
 
@@ -187,6 +194,7 @@ public:
 
 			}
 		}
+
 		cout << "\n";
 
 		PrintText text_two("\t Your quiz result !");
@@ -199,7 +207,7 @@ public:
 		cout << "\t \033[36m Score : " << score << " / 100 \033[0m" << endl;
 		cout << "\n\n";
 
-		Sleep(2000);
+		Sleep(5000);
 	}
 };
 
@@ -212,7 +220,8 @@ struct Question
 	string TrueAnswer;
 };
 
-class CreateQuiz {
+class CreateQuiz 
+{
 public:
 	vector<Question> questions;
 
@@ -234,7 +243,7 @@ public:
 			system("cls");
 
 			cout << "\n";
-			cout << "\033[35m \t  Welcome to Create Question Page ! \033[0m";
+			cout << "\033[35m \t Welcome to Create Question Page ! \033[0m";
 			cout << "\n\n";
 
 			Question q;
@@ -261,7 +270,7 @@ public:
 				cout << "\t \033[36m Enter true answer (A/B/C) : \033[0m";
 				getline(cin, q.TrueAnswer);
 
-				q.TrueAnswer = Upper(q.TrueAnswer);
+				q.TrueAnswer = ToUpper::Upper(q.TrueAnswer);
 
 				if (q.TrueAnswer == "A" || q.TrueAnswer == "B" || q.TrueAnswer == "C")
 				{
@@ -269,14 +278,14 @@ public:
 				}
 
 				cout << "\n\n";
-				cout << "\t \033[31m Incorrect answer! Try again! \033[0m";
+				cout << "\t\t \033[31m Incorrect answer! Try again ! \033[0m";
 				cout << "\n\n";
 			}
 
 			questions.push_back(q);
 
 			cout << "\n\n";
-			cout << "\n\t\033[32m Question successfully entered!\033[0m";
+			cout << "\t\t \033[32m Question successfully introduced ! \033[0m";
 			cout << "\n\n";
 
 			Sleep(2000);
@@ -284,7 +293,7 @@ public:
 		}
 
 		cout << "\n\n";
-		cout << "\n\t\033[32m All questions have been successfully entered! \033[0m";
+		cout << "\t\t \033[32m All questions have been successfully introduced ! \033[0m";
 		cout << "\n\n";
 
 		Sleep(2000);
@@ -386,19 +395,23 @@ public:
 		cout << "\n";
 		cout << "\t \033[36m Score : " << score << " / " << questions.size()<< " \033[0m\n\n";
 
-		Sleep(9000);
+		Sleep(5000);
 	}
 };
 
 //-------------------------------------------------- SECOUND PART ----------------------------------------------------------------------
 
-class SecoundMainPage
+class SecundMainPage
 {
 public:
-		int score;
-		int right;
+	int score;
+	int right;
+	CreateQuiz quiz;
+	string choice;
+	Questions Questions;;
 
-
+	void Show()
+	{
 		system("cls");
 
 		cout << "\n";
@@ -426,7 +439,7 @@ public:
 			cout << "\t \033[36m Enter choice : \033[0m";
 			cin >> choice;
 
-			if (choice == '1') 
+			if (choice == "1")
 			{
 				Quiz q1;
 				q1.QuizPage(Questions.questions());
@@ -435,12 +448,12 @@ public:
 				break;
 			}
 
-			else if (choice == '2')
+			else if (choice == "2")
 			{
 				if (quiz.questions.empty())
 				{
 					cout << "\n\n";
-					cout << "\t \033[31m No quiz found ! \033[0m";
+					cout << "\t\t \033[31m No quiz found ! \033[0m";
 					cout << "\n\n";
 					Sleep(2000);
 					continue;
@@ -453,7 +466,7 @@ public:
 				break;
 			}
 
-			else if (choice == '3')
+			else if (choice == "3")
 			{
 				quiz.Create();
 				continue;
@@ -462,7 +475,7 @@ public:
 				break;
 			}
 
-			else if (choice == '4')
+			else if (choice == "4")
 			{
 				system("cls");
 
@@ -479,7 +492,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Incorrect choice ! Please again ! \033[0m" << endl;
+				cout << "\t\t \033[31m Incorrect choice ! Please again ! \033[0m" << endl;
 				Sleep(3000);
 
 			}
@@ -493,6 +506,7 @@ public:
 	string line;
 	string password;
 	string username;
+	int count = 3;
 
 	void Include()
 	{
@@ -535,7 +549,7 @@ public:
 			if (!file.is_open()) 
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m File isn't open ! \033[0m" << endl;
+				cout << "\t\t \033[31m File isn't open ! \033[0m" << endl;
 				cout << "\n\n";
 
 				return;
@@ -560,12 +574,12 @@ public:
 			if (find)
 			{
 				cout << "\n\n";
-				cout << "\t \033[32m Enterance Successful ! \033[0m" << endl;
+				cout << "\t\t \033[32m Introduction Successful ! \033[0m" << endl;
 				cout << "\n\n";
 
 				Sleep(2000);
 
-				SecoundMainPage smain;
+				SecundMainPage smain;
 				smain.Show();
 
 				break;
@@ -574,9 +588,12 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your password or username is flase ! Please try again ! \033[0m" << endl;
+				cout << "\t\t \033[31m Your password or username is incorrect ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
+
 				count--;
+				cout << "\t\t \033[31m Your remainin chance : \033[0m" << count << endl;
+				cout << "\n\n";
 
 				Sleep(2000);
 
@@ -584,7 +601,7 @@ public:
 				{
 					system("cls");
 					cout << "\n\n";
-					cout << "\t \033[31m If you don't have a account you can go Sign Up page ! \033[0m" << endl;
+					cout << "\t\t \033[31m If you don't have a account you can go Sign Up page ! \033[0m" << endl;
 					cout << "\n\n";
 
 					Sleep(2000);
@@ -630,7 +647,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your name is short ! Please try again ! \033[0m" << endl;
+				cout << "\t\t \033[31m Your name is short ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
 			}
 		}
@@ -650,7 +667,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your surname is short ! Please try again ! \033[0m" << endl;
+				cout << "\t\t \033[31m Your surname is short ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
 			}
 		}
@@ -670,7 +687,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your user name is short ! Please try again ! \033[0m" << endl;
+				cout << "\t\t \033[31m Your user name is short ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
 			}
 		}
@@ -690,7 +707,7 @@ public:
 			else
 			{
 				cout << "\n\n";
-				cout << "\t \033[31m Your password is short ! Please try again ! \033[0m" << endl;
+				cout << "\t\t \033[31m Your password is short ! Please try again ! \033[0m" << endl;
 				cout << "\n\n";
 			}
 		}
@@ -710,10 +727,10 @@ public:
 			file.close();
 
 			cout << "\n\n";
-			cout << "\t \033[32m User saved successfully ! \033[0m" << endl;
+			cout << "\t\t \033[32m User saved successfully ! \033[0m" << endl;
 			cout << "\n\n";
 
-			Sleep(3000);
+			Sleep(2000);
 
 			SignIn signIn;
 			signIn.Include();
@@ -722,7 +739,7 @@ public:
 		else 
 		{
 			cout << "\n\n";
-			cout << "\t \033[31m Error saving user ! \033[0m" << endl;
+			cout << "\t\t \033[31m Error saving user ! \033[0m" << endl;
 			cout << "\n\n";
 		}
 	}
@@ -738,6 +755,8 @@ class Page
 class MainPage : public Page
 {
 public:
+	string choice;
+
 	void Show() override
 	{
 		cout << "\n";
@@ -797,8 +816,8 @@ public:
 			else
 			{    
 				cout << "\n\n";
-				cout << "\t \033[31m Incorrect choice ! Please again ! \033[0m" << endl;
-				Sleep(3000);
+				cout << "\t\t \033[31m Incorrect choice ! Please again ! \033[0m" << endl;
+				Sleep(2000);
 			}
 		}
 	}
