@@ -68,9 +68,6 @@ public:
 class ShowCorrectAnswer
 {
 public:
-	string corretAnswer;
-	string text;
-
 	static string Upper(const string& s)
 	{
 		string res = s;
@@ -218,15 +215,6 @@ struct Question
 class CreateQuiz {
 public:
 	vector<Question> questions;
-
-	static string Upper(const string& s)
-	{
-		string res = s;
-		for (char& c : res) {
-			c = toupper(c);
-		}
-		return res;
-	}
 
 	void Create()
 	{
@@ -407,20 +395,13 @@ public:
 class SecoundMainPage
 {
 public:
-	char choice;
-
-	void Show()
-	{
 		int score;
 		int right;
 
-		CreateQuiz quiz;
 
 		system("cls");
 
 		cout << "\n";
-
-		Questions Questions;
 
 		PrintText text("\t Welcome to Main Page !");
 		text.Print();
@@ -519,15 +500,12 @@ public:
 		cin.clear();
 		system("cls");
 
-
 		cout << "\n";
 
 		PrintText text("\t  Welcome to Sign In page !");
 		text.Print();
 
 		cout << "\n\n";
-
-		int count = 3;
 
 		while(count > 0)
 		{
@@ -762,7 +740,6 @@ class MainPage : public Page
 public:
 	void Show() override
 	{
-		string choice;
 		cout << "\n";
 
 		PrintText text("\t Welcome to Main Page !");
