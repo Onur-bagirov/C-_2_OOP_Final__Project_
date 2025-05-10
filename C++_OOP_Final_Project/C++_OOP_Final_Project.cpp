@@ -469,7 +469,6 @@ public:
 			else if (choice == "3")
 			{
 				quiz.Create();
-				continue;
 
 				Show();
 				break;
