@@ -7,13 +7,13 @@
 #include <conio.h> 
 #include <cctype>
 
-// ---------------------------------------------------- SHOW TITLE PART -------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
 
 using namespace std;
 
 void main();
 
-class Password
+class Password // ?ifr?nin ekrana ulduz kimi ç?xarmaq üçün class
 {
 public:
 	static string password()
@@ -21,17 +21,19 @@ public:
 		string password;
 		char pas;
 
-		while ((pas = _getch()) != 13)
+		while ((pas = _getch()) != 13) // 13 ACII kodudur User enter düym?sini? basana q?d?r döngü davam edir
+			                           // _getch is? user daxil etdikl?rini oxuyur
 		{
-			if (pas == 8 && !password.empty())
+			if (pas == 8 && !password.empty()) // empty -  ?ifr? hissinin bo? olub omad??n?n? yoxlay?r
+				                               // 8 - daxil eilmi? sonuncu simvolu silm?k üçündür
 			{
-				password.pop_back();
-				cout << "\b \b";
+				password.pop_back(); // ?ifr?nin son simvolunu silm?k üçündür
+				cout << "\b \b"; // Simvolu silmek üçündür
 			}
 
 			else if (pas != 8)
 			{
-				password.push_back(pas);
+				password.push_back(pas); // daxil edilmi? sonuncu simvolu string - ? ?lav? edir
 				cout << "*";
 			}
 		}
@@ -39,9 +41,9 @@ public:
 		cout << endl;
 		return password;
 	}
-}; // Passwordu ulduz cevirmek ucun class
+}; 
 
-class PrintText
+class PrintText // Simvollar? t?k-t?k v? r?ngli ekrana ç?xartamq üçün class
 {
 public:
 	string	Text;
@@ -51,19 +53,19 @@ public:
 		Text = text;
 	}
 
-	void Print() 
+	void Print()
 	{
-		for (int i = 0; i < Text.length(); i++) 
+		for (int i = 0; i < Text.length(); i++)
 		{
 			cout << "\033[35m" << Text[i] << "\033[0m";
 			Sleep(40);
 		}
 
 		cout << endl;
-	} 
-}; // Texti animasiya vermek ucun class
+	}
+};
 
-class ToUpper
+class ToUpper // Daxil edilmi? h?rfl?ri böüyük h?rf ??klid? qaytaran class
 {
 public:
 	static string Upper(const string& s)
@@ -72,16 +74,16 @@ public:
 
 		for (char& c : res)
 		{
-			c = toupper(c);
+			c = toupper(c); // toupper - char simvolu böyütm?k üçün metot
 		}
 
 		return res;
 	}
-}; // Stringleri boyutmek ucun fuksiya
+};
 
-//---------------------------------------------------- THIRT PART -------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
 
-class ShowCorrectAnswer
+class ShowCorrectAnswer 
 {
 public:
 	string corretAnswer;
@@ -249,19 +251,87 @@ public:
 			Question q;
 			cout << "\n\n";
 
-			cout << "\t" << i + 1 << ". ";
-			getline(cin, q.Question_c);
+			while (true)
+			{
+				cout << "\t" << i + 1 << ". ";
+				getline(cin, q.Question_c);
+
+				if (q.Question_c == "")
+				{
+					cout << "\n\n";
+					cout << "\t\t \033[31m You must fill in the blank ! \033[0m";
+					cout << "\n\n";
+
+					continue;
+				}
+
+				else
+				{
+					break;
+				}
+			}
 
 			cout << "\n";
 
-			cout << "\t\t A) ";
-			getline(cin, q.A);
+			while (true)
+			{
+				cout << "\t\t A) ";
+				getline(cin, q.A);
 
-			cout << "\t\t B) ";
-			getline(cin, q.B);
+				if (q.A == "")
+				{
+					cout << "\n\n";
+					cout << "\t\t \033[31m You must fill in the blank ! \033[0m";
+					cout << "\n\n";
 
-			cout << "\t\t C) ";
-			getline(cin, q.C);
+					continue;
+				}
+
+				else
+				{
+					break;
+				}
+			}
+
+			while (true)
+			{
+				cout << "\t\t B) ";
+				getline(cin, q.B);
+
+				if (q.B == "")
+				{
+					cout << "\n\n";
+					cout << "\t\t \033[31m You must fill in the blank ! \033[0m";
+					cout << "\n\n";
+
+					continue;
+				}
+
+				else
+				{
+					break;
+				}
+			}
+
+			while (true)
+			{
+				cout << "\t\t C) ";
+				getline(cin, q.C);
+
+				if (q.C == "")
+				{
+					cout << "\n\n";
+					cout << "\t\t \033[31m You must fill in the blank ! \033[0m";
+					cout << "\n\n";
+
+					continue;
+				}
+
+				else
+				{
+					break;
+				}
+			}
 
 			cout << "\n";
 
@@ -399,9 +469,9 @@ public:
 	}
 };
 
-//-------------------------------------------------- SECOUND PART ----------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
 
-class SecundMainPage
+class SecondMainPage
 {
 public:
 	int score;
@@ -545,7 +615,7 @@ public:
 
 			ifstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document (2).txt");
 
-			if (!file.is_open()) 
+			if (!file.is_open()) // Fayl?n aç?l?b aç?lmad???n yoxlay?r
 			{
 				cout << "\n\n";
 				cout << "\t\t \033[31m File isn't open ! \033[0m" << endl;
@@ -554,21 +624,21 @@ public:
 				return;
 			}
 
-			string username_;
-			string password_;
+			string username_; // Fayladn oxundu?u username saxlamaq üçün
+			string password_; // Fayladn oxundu?u ?ifr?ni saxlamaq üçün
 
 			bool find = false;
 
-			while (file >> username_ >> password_)
+			while (file >> username_ >> password_) // Fayldak? m?lumtalar? oxumaq üçündür
 			{
-				if (username_ == username && password_ == password)
+				if (username_ == username && password_ == password) 
 				{
 					find = true;
 					break;
 				}
 			}
 
-			file.close();
+			file.close(); // Fayl? ba?l?y?r
 
 			if (find)
 			{
@@ -578,7 +648,7 @@ public:
 
 				Sleep(2000);
 
-				SecundMainPage smain;
+				SecondMainPage smain;
 				smain.Show();
 
 				break;
@@ -711,7 +781,7 @@ public:
 			}
 		}
 
-		SaveFile();
+		SaveFile(); // User m?lumtalar?n? fayla save edir
 	}
 
 	//---------------------------------------------------------------- USER INFORMATION SAVE PART ---------------------------------------------------------------
@@ -720,10 +790,10 @@ public:
 	{
 		ofstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document (2).txt", ios::app); // ios::app - User melumatlari file elave edir.
 
-		if (file.is_open()) 
+		if (file.is_open()) // Fayl?n aç?l?b aç?lmad???n yoxlay?r
 		{
-			file << "  " << username << "  " << password << "  " << name << "  " << surname << endl;
-			file.close();
+			file << "  " << username << "  " << password << "  " << name << "  " << surname << endl; // M?lumatlar? fayla yaz?r
+			file.close(); // Fayl? ba?l?y?r
 
 			cout << "\n\n";
 			cout << "\t\t \033[32m User saved successfully ! \033[0m" << endl;
@@ -744,7 +814,7 @@ public:
 	}
 };
 
-//-------------------------------------------------- FIRTS PART --------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
 
 class Page
 {
@@ -822,7 +892,7 @@ public:
 	}
 };
 
-// -----------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
 
 void main()
 {
