@@ -13,7 +13,7 @@ using namespace std;
 
 void main();
 
-class Password // ?ifr?nin ekrana ulduz kimi ç?xarmaq üçün class
+class Password // passwordu ekrana ulduz kimi çixarmaq üçün class
 {
 public:
 	static string password()
@@ -21,19 +21,19 @@ public:
 		string password;
 		char pas;
 
-		while ((pas = _getch()) != 13) // 13 ACII kodudur User enter düym?sini? basana q?d?r döngü davam edir
-			                           // _getch is? user daxil etdikl?rini oxuyur
+		while ((pas = _getch()) != 13) // 13 ACII kodudur  User enter düymesini basanda qeder döngü davam edir
+			                           // _getch -  user daxil etdiklerini oxuyur
 		{
-			if (pas == 8 && !password.empty()) // empty -  ?ifr? hissinin bo? olub omad??n?n? yoxlay?r
-				                               // 8 - daxil eilmi? sonuncu simvolu silm?k üçündür
+			if (pas == 8 && !password.empty()) // empty -  password hissesini bos olub olmadiqini yoxlayie
+				                               // 8 - daxil eilmis sonuncu simvolu silmek üçündür
 			{
-				password.pop_back(); // ?ifr?nin son simvolunu silm?k üçündür
+				password.pop_back(); // passwordun son simvolunu silmek üçündür
 				cout << "\b \b"; // Simvolu silmek üçündür
 			}
 
 			else if (pas != 8)
 			{
-				password.push_back(pas); // daxil edilmi? sonuncu simvolu string - ? ?lav? edir
+				password.push_back(pas); // daxil edilmis sonuncu simvolu stringe elave edir
 				cout << "*";
 			}
 		}
@@ -43,7 +43,7 @@ public:
 	}
 }; 
 
-class PrintText // Simvollar? t?k-t?k v? r?ngli ekrana ç?xartamq üçün class
+class PrintText // Simvollari tek - tek ve rengli ekrana çixartamq üçün class
 {
 public:
 	string	Text;
@@ -65,7 +65,7 @@ public:
 	}
 };
 
-class ToUpper // Daxil edilmi? h?rfl?ri böüyük h?rf ??klid? qaytaran class
+class ToUpper // Daxil edilmis herflere böüyük herf kimi qaytaran class
 {
 public:
 	static string Upper(const string& s)
@@ -74,7 +74,7 @@ public:
 
 		for (char& c : res)
 		{
-			c = toupper(c); // toupper - char simvolu böyütm?k üçün metot
+			c = toupper(c); // toupper - char simvolu böyütmek üçün metot
 		}
 
 		return res;
@@ -103,11 +103,11 @@ public:
 	{
 		return
 		{
-			ShowCorrectAnswer("\t 1. Which data type is used for decimal number in Python ? (20 coin) \n\n \t\tA) Int\n \t\tB) Float\n \t\tC) Str \n\n", "B"),
-			ShowCorrectAnswer("\t 2. Which function is used to take input from the user in Python ?  (20 coin)\n\n \t\tA) Read()\n \t\tB) Input()\n \t\tC) Scan() \n\n", "B"),
-			ShowCorrectAnswer("\t 3. Which brackets are used to define a list in Python ?  (20 coin)\n\n \t\tA) {}\n \t\tB) ()\n \t\tC) [] \n\n", "C"),
-			ShowCorrectAnswer("\t 4. Which keyword is used to define a function in Python ?  (20 coin)\n\n \t\tA) Func\n \t\tB) Function\n \t\tC) Def \n\n", "C"),
-		    ShowCorrectAnswer("\t 5. Which of the following is a valid variable name in Python ?  (20 coin)\n\n \t\tA) 2value\n \t\tB) value_2 \n \t\tC) value-2 \n\n", "B")
+			ShowCorrectAnswer("\t 1. Which data type is used for decimal number in Python ?  \n\n \t\tA) Int\n \t\tB) Float\n \t\tC) Str \n\n", "B"),
+			ShowCorrectAnswer("\t 2. Which function is used to take input from the user in Python ? \n\n \t\tA) Read()\n \t\tB) Input()\n \t\tC) Scan() \n\n", "B"),
+			ShowCorrectAnswer("\t 3. Which brackets are used to define a list in Python ? \n\n \t\tA) {}\n \t\tB) ()\n \t\tC) [] \n\n", "C"),
+			ShowCorrectAnswer("\t 4. Which keyword is used to define a function in Python ? \n\n \t\tA) Func\n \t\tB) Function\n \t\tC) Def \n\n", "C"),
+		    ShowCorrectAnswer("\t 5. Which of the following is a valid variable name in Python ? \n\n \t\tA) 2value\n \t\tB) value_2 \n \t\tC) value-2 \n\n", "B")
 		};
 	}
 };
@@ -146,7 +146,7 @@ public:
 
 				cout << "\n\n";
 
-				cout << q.text << "\t \033[36m Enter answer ( A/B/C) : \033[0m";
+				cout << q.text << "\t \033[36m Enter answer (A/B/C) : \033[0m";
 				cin >> choice;
 
 				cin.ignore();
@@ -173,7 +173,7 @@ public:
 					else
 					{
 						cout << "\n\n";
-						cout << "\t\t \033[31m Your answer isn't correct ! \033[0m";
+						cout << "\t\t \033[31m Your answer is incorrect ! \033[0m";
 						cout << "\n\n";
 
 						cout << "\t\t \033[31m Correct answer is : \033[0m" << q.corretAnswer;
@@ -206,7 +206,7 @@ public:
 
 		cout << "\t \033[36m Right Questions : " << right << " / 5 \033[0m" << endl;
 		cout << "\n\n";
-		cout << "\t \033[36m Score : " << score << " / 100 \033[0m" << endl;
+		cout << "\t \033[36m Score : " << score << "\033[0m" << endl;
 		cout << "\n\n";
 
 		Sleep(5000);
@@ -226,6 +226,7 @@ class CreateQuiz
 {
 public:
 	vector<Question> questions;
+	int question_count;
 
 	void Create()
 	{
@@ -240,7 +241,12 @@ public:
 
 		cout << "\n\n";
 
-		for (int i = 0; i < 5; ++i)
+		cout << "\t \033[36m Enter the number of questions : \033[0m";
+		cin >> question_count;
+
+		cin.ignore();
+
+		for (int i = 0; i < question_count; ++i)
 		{
 			system("cls");
 
@@ -348,7 +354,7 @@ public:
 				}
 
 				cout << "\n\n";
-				cout << "\t\t \033[31m Incorrect answer! Try again ! \033[0m";
+				cout << "\t\t \033[31m Error ! Try again ! \033[0m";
 				cout << "\n\n";
 			}
 
@@ -399,10 +405,13 @@ public:
 				cout << "\033[35m \t Welcome to Quiz Page ! \033[0m";
 				cout << "\n\n";
 
-				cout << "\t" << i + 1 << ". " << q.Question_c << "\n\n";
-				cout << "\t\t A) " << q.A << "\n";
-				cout << "\t\t B) " << q.B << "\n";
-				cout << "\t\t C) " << q.C << "\n\n";
+				cout << "\t" << i + 1 << ". " << q.Question_c;
+
+				cout << "\n\n";
+
+				cout << "\t\t A) " << q.A << endl;
+				cout << "\t\t B) " << q.B << endl;
+				cout << "\t\t C) " << q.C;
 
 				cout << "\n\n";
 
@@ -417,7 +426,7 @@ public:
 					{
 
 						cout << "\n\n";
-						cout << "\t\t \033[32m Your answer is correct! \033[0m";
+						cout << "\t\t \033[32m Your answer is correct ! \033[0m";
 						cout << "\n\n";
 
 						Sleep(2000);
@@ -428,10 +437,10 @@ public:
 					else
 					{
 						cout << "\n\n";
-						cout << "\t\t \033[31m Your answer isn't correct! \033[0m";
+						cout << "\t\t \033[31m Your answer is incorrect ! \033[0m";
 						cout << "\n\n";
 
-						cout << "\t\t \033[31m Correct answer is: \033[0m" << q.TrueAnswer;
+						cout << "\t\t \033[31m Correct answer is : \033[0m" << q.TrueAnswer;
 						cout << "\n\n";
 
 						Sleep(2000);
@@ -461,9 +470,10 @@ public:
 		resultText.Print();
 
 		cout << "\n\n";
-		cout << "\t \033[36m Right Questions : " << right << " / " << questions.size() << " \033[0m\n";
-		cout << "\n";
-		cout << "\t \033[36m Score : " << score << " / " << questions.size()<< " \033[0m\n\n";
+		cout << "\t \033[36m Right Questions : " << right << " / " << questions.size() << " \033[0m";
+
+		cout << "\n\n";
+		cout << "\t \033[36m Score : " << score << " \033[0m";
 
 		Sleep(5000);
 	}
@@ -522,11 +532,14 @@ public:
 			{
 				if (quiz.questions.empty())
 				{
+					system("cls");
 					cout << "\n\n";
 					cout << "\t\t \033[31m No quiz found ! \033[0m";
 					cout << "\n\n";
 					Sleep(2000);
-					continue;
+
+					Show();
+					break;
 				}
 
 				YourQuiz yq;
@@ -615,7 +628,7 @@ public:
 
 			ifstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document (2).txt");
 
-			if (!file.is_open()) // Fayl?n aç?l?b aç?lmad???n yoxlay?r
+			if (!file.is_open()) // Faylin açilib açilmadigin yoxlayir
 			{
 				cout << "\n\n";
 				cout << "\t\t \033[31m File isn't open ! \033[0m" << endl;
@@ -624,12 +637,12 @@ public:
 				return;
 			}
 
-			string username_; // Fayladn oxundu?u username saxlamaq üçün
-			string password_; // Fayladn oxundu?u ?ifr?ni saxlamaq üçün
+			string username_; // Fayldan oxudugu usernamei saxlamaq üçün
+			string password_; // Fayladn oxundugu passwordu saxlamaq üçün
 
 			bool find = false;
 
-			while (file >> username_ >> password_) // Fayldak? m?lumtalar? oxumaq üçündür
+			while (file >> username_ >> password_) // Fayldaki melumtalari oxumaq üçündür
 			{
 				if (username_ == username && password_ == password) 
 				{
@@ -638,7 +651,7 @@ public:
 				}
 			}
 
-			file.close(); // Fayl? ba?l?y?r
+			file.close(); // Fayli baglayir
 
 			if (find)
 			{
@@ -781,7 +794,7 @@ public:
 			}
 		}
 
-		SaveFile(); // User m?lumtalar?n? fayla save edir
+		SaveFile(); // User melumtalarini fayla save edir
 	}
 
 	//---------------------------------------------------------------- USER INFORMATION SAVE PART ---------------------------------------------------------------
@@ -790,10 +803,10 @@ public:
 	{
 		ofstream file("C:\\Users\\onurr\\OneDrive\\Desktop\\New Text Document (2).txt", ios::app); // ios::app - User melumatlari file elave edir.
 
-		if (file.is_open()) // Fayl?n aç?l?b aç?lmad???n yoxlay?r
+		if (file.is_open()) // Faylin açilib açilmadigini yoxlayir
 		{
-			file << "  " << username << "  " << password << "  " << name << "  " << surname << endl; // M?lumatlar? fayla yaz?r
-			file.close(); // Fayl? ba?l?y?r
+			file << "  " << username << "  " << password << "  " << name << "  " << surname << endl; // Melumatlari fayla yazir
+			file.close(); // Fayli baglayir
 
 			cout << "\n\n";
 			cout << "\t\t \033[32m User saved successfully ! \033[0m" << endl;
